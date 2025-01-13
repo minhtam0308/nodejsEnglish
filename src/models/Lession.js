@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     }
     Lession.init({
         title: DataTypes.STRING,
-        image: DataTypes.BLOB,
+        image: DataTypes.BLOB('medium'),
         description: DataTypes.TEXT,
         level: DataTypes.INTEGER,
         deleteAt: DataTypes.DATE

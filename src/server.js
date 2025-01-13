@@ -8,7 +8,7 @@ require('dotenv').config()
 let app = express();
 
 //display data when post (req.body)
-app.use(bodyParser.json({ limit: '300kb' }))
+app.use(bodyParser.json({ limit: '3mb' }))
 app.use(bodyParser.urlencoded({ extended: true }))
 
 // CORS error

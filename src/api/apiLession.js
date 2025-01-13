@@ -17,7 +17,21 @@ const apiCreateLession = async (data) => {
         return "Create Lession Success";
     } catch (e) {
         console.log(e);
-        return "Error From API"
+        return "Error From API";
     }
 }
-module.exports = { apiCreateLession };
+
+const apiGetAllLession = async () => {
+    try {
+        const res = await db.Lession.findAll();
+        return res;
+    } catch (e) {
+        console.log("loi", e);
+    }
+}
+
+module.exports = {
+    apiCreateLession,
+    apiGetAllLession
+
+};
