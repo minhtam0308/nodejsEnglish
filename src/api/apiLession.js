@@ -23,15 +23,61 @@ const apiCreateLession = async (data) => {
 
 const apiGetAllLession = async () => {
     try {
-        const res = await db.Lession.findAll();
+        const res = await db.Lession.findAll(
+            { where: { deleteAt: null } }
+        );
         return res;
     } catch (e) {
         console.log("loi", e);
     }
 }
 
+const apiChangeLessById = async (data) => {
+    try {
+        await db.Lession.update(
+            {
+                title: data.title,
+                image: data.image,
+                description: data.description,
+                level: data.level,
+                updatedAt: new Date()
+            },
+            {
+                where: {
+                    id: data.id,
+                },
+            },
+        );
+
+    } catch (e) {
+        console.log("api", e);
+    }
+}
+
+const apiDeleteLessByid = async (id) => {
+    try {
+        await db.Lession.update(
+            {
+                deleteAt: new Date()
+            },
+            {
+                where: {
+                    id: id,
+                },
+            },
+        );
+        return false;
+
+    } catch (e) {
+        console.log("api", e);
+        return true;
+    }
+}
+
 module.exports = {
     apiCreateLession,
-    apiGetAllLession
+    apiGetAllLession,
+    apiChangeLessById,
+    apiDeleteLessByid
 
 };
