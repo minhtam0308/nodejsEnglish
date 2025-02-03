@@ -4,6 +4,7 @@ import { GetAllLession } from '../controllers/GetAllLession';
 import { PostUpdateLessById } from '../controllers/PostUpdateLessById';
 ; import { PostDeleteLessById } from '../controllers/PostDeleteLessById';
 import { PostCreateQuestion } from '../controllers/PostCreateQuestion';
+import { PostDeleteQuesById } from '../controllers/PostDeleteQuesById';
 import { GetAllQA } from '../controllers/GetAllQA';
 
 let router = express.Router();
@@ -15,6 +16,7 @@ let web = (app) => {
     router.post('/api/postDeleteLessById', PostDeleteLessById);
     router.post('/api/postCreateQues', PostCreateQuestion);
     router.get('/api/getAllQA', GetAllQA);
+    router.post('/api/postDeleteQuesById', PostDeleteQuesById);
     router.get('/', (req, res) => {
         return res.send('test');
     })

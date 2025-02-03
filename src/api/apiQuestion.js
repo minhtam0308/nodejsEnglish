@@ -42,15 +42,16 @@ const apiGetAllQA = async (data) => {
             }
         });
         for (let i = 0; i < ques.length; i++) {
-            let temp = {};
+            let temp;
             let ans = await db.Answer.findAll({
                 where: {
                     id_question: ques[i].id
                 }
             })
-            temp.ques = {
+            temp = {
                 cont: ques[i].description,
                 image: ques[i].image,
+                id: ques[i].id,
                 ans
             }
             res.push(temp)
@@ -63,7 +64,21 @@ const apiGetAllQA = async (data) => {
 
 }
 
+const apiDeleteQuesById = async (id) => {
+    try {
+        let res = await db.Question.destroy({
+            where: {
+                id: id,
+            }
+        })
+        return res;
+    } catch (e) {
+        console.log(e);
+    }
+}
+
 module.exports = {
     apiCreateQues,
-    apiGetAllQA
+    apiGetAllQA,
+    apiDeleteQuesById
 }
