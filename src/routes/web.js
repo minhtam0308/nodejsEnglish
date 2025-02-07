@@ -5,7 +5,10 @@ import { PostUpdateLessById } from '../controllers/PostUpdateLessById';
 ; import { PostDeleteLessById } from '../controllers/PostDeleteLessById';
 import { PostCreateQuestion } from '../controllers/PostCreateQuestion';
 import { PostDeleteQuesById } from '../controllers/PostDeleteQuesById';
+import { PostUpdateQuestion } from '../controllers/PostUpdateQestion';
+
 import { GetAllQA } from '../controllers/GetAllQA';
+import { GetAllQAByUser } from '../controllers/GetAllQAByUser';
 
 let router = express.Router();
 
@@ -17,6 +20,9 @@ let web = (app) => {
     router.post('/api/postCreateQues', PostCreateQuestion);
     router.get('/api/getAllQA', GetAllQA);
     router.post('/api/postDeleteQuesById', PostDeleteQuesById);
+    router.post('/api/PostUpdateQuestion', PostUpdateQuestion);
+    router.get('/api/GetAllQAByUser', GetAllQAByUser);
+
     router.get('/', (req, res) => {
         return res.send('test');
     })

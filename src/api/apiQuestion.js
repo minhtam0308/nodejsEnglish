@@ -18,13 +18,12 @@ const apiCreateQues = async (data) => {
         // })
 
         //do bat dong bo dung voi for k dung voi map
-        let test = [];
         for (let i = 0; i < data.ans.length; i++) {
-            test.push(await db.Answer.create({
+            await db.Answer.create({
                 id_question: resQues.id,
                 description: data.ans[i].cont,
                 is_true: data.ans[i].is_true
-            }))
+            })
         }
 
         return "Create question sucess";
@@ -77,8 +76,68 @@ const apiDeleteQuesById = async (id) => {
     }
 }
 
+const apiUpdateQues = async (data) => {
+    // arrDelete, ques
+    try {
+        if (data && data.arrDelete && data.arrDelete.length > 0) {
+            for (let i = 0; i < data.arrDelete.length; i++) {
+                if (data.arrDelete[i] > 0) {
+                    let resDele = await db.Answer.destroy({
+                        where: {
+                            id: data.arrDelete[i],
+                        }
+                    })
+                    if (resDele !== 1) {
+                        return "ERROR IN SERVER";
+                    }
+                }
+            }
+
+        }
+        await db.Question.update(
+            {
+                image: data.ques.image,
+                description: data.ques.cont
+            },
+            {
+                where: {
+                    id: data.ques.id,
+                },
+            },
+        );
+
+        for (let i = 0; i < data.ques.ans.length; i++) {
+            if (data.ques.ans[i].id <= 0) {
+                await db.Answer.create({
+                    id_question: data.ques.id,
+                    description: data.ques.ans[i].description,
+                    is_true: data.ques.ans[i].is_true
+                })
+                // console.log("Answwer: ", resCreateAns);
+            } else {
+                await db.Answer.update(
+                    {
+                        description: data.ques.ans[i].description,
+                        is_true: data.ques.ans[i].is_true
+                    },
+                    {
+                        where: {
+                            id: data.ques.ans[i].id
+                        }
+                    }
+                )
+            }
+        }
+        return "Update Success";
+
+    } catch (e) {
+        console.log(e);
+    }
+}
+
 module.exports = {
     apiCreateQues,
     apiGetAllQA,
-    apiDeleteQuesById
+    apiDeleteQuesById,
+    apiUpdateQues
 }

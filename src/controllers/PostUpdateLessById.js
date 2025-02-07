@@ -32,4 +32,6 @@ const PostUpdateLessById = async (req, res) => {
 
 }
 
-module.exports = { PostUpdateLessById }
+module.exports = {
+    PostUpdateLessById
+}
