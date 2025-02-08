@@ -37,6 +37,10 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
+//check so cot trong model
+console.log(Object.keys(db.History.rawAttributes));
+
+// sequelize.drop(db.History);
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 

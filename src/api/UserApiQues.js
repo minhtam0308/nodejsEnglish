@@ -32,6 +32,38 @@ const apiUserGetQAByidLess = async (id) => {
         return ["ERROR DATABASE"];
     }
 }
+
+
+const apiCheckCorrAns = async (idAns, idQues, idLess, time) => {
+
+    try {
+        let corr = await db.Answer.findByPk(idAns);
+        await db.History.create({
+            time: time,
+            correct: corr.is_true,
+            idAns: idAns,
+            idQues: idQues,
+            idLess: idLess
+        })
+        return corr;
+    } catch (e) {
+        console.log(e);
+    }
+}
+const apiGetMaxTimeLessById = async (id) => {
+    try {
+        let res = await db.History.max('time', {
+            where: {
+                idLess: id
+            }
+        })
+        return res;
+    } catch (e) {
+        console.log(e)
+    }
+}
 module.exports = {
-    apiUserGetQAByidLess
+    apiUserGetQAByidLess,
+    apiCheckCorrAns,
+    apiGetMaxTimeLessById
 }
