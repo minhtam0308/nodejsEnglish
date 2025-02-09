@@ -62,8 +62,34 @@ const apiGetMaxTimeLessById = async (id) => {
         console.log(e)
     }
 }
+
+const apiFindCorrAns = async (idQues) => {
+    try {
+        let arrAns = [];
+        if (idQues) {
+            let corr = await db.Answer.findAll({
+                where: { id_question: idQues }
+            });
+
+
+
+            if (corr && corr.length > 0) {
+                for (let i = 0; i < corr.length; i++) {
+                    if (corr[i].is_true === true || corr[i].is_true === 1) {
+                        arrAns.push(corr[i].id);
+                    }
+                }
+            }
+        }
+        return arrAns;
+    } catch (e) {
+        console.log(e);
+    }
+}
+
 module.exports = {
     apiUserGetQAByidLess,
     apiCheckCorrAns,
-    apiGetMaxTimeLessById
+    apiGetMaxTimeLessById,
+    apiFindCorrAns
 }
