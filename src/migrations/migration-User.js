@@ -16,7 +16,19 @@ module.exports = {
             role: {
                 type: Sequelize.CHAR(100)
             },
-
+            image: {
+                allowNull: true,
+                type: Sequelize.BLOB('medium')
+            },
+            email: {
+                type: Sequelize.STRING
+            },
+            password: {
+                type: Sequelize.STRING
+            },
+            signature: {
+                type: Sequelize.STRING
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE

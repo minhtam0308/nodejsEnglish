@@ -1,4 +1,6 @@
-import db from '../models'
+
+//dung require moi co du doan
+const db = require('../models')
 
 const apiUserGetQAByidLess = async (id) => {
     try {
@@ -87,9 +89,46 @@ const apiFindCorrAns = async (idQues) => {
     }
 }
 
+//thu viet hoa
+
+const ApiRegisterUser = async (data) => {
+    try {
+        let existEmail = await db.User.findOne({
+            where: { email: data.email }
+        });
+        if (existEmail) {
+            return 1;
+        }
+
+        await db.User.create(data);
+        return 0;
+    } catch (e) {
+        console.log(e);
+        return 2;
+    }
+}
+
+const apiLogInUser = async (email) => {
+    try {
+
+        let res = await db.User.findOne({
+            where: {
+                email: email
+            }
+        })
+        return res;
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+
+
 module.exports = {
     apiUserGetQAByidLess,
     apiCheckCorrAns,
     apiGetMaxTimeLessById,
-    apiFindCorrAns
+    apiFindCorrAns,
+    ApiRegisterUser,
+    apiLogInUser
 }

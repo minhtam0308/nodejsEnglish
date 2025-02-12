@@ -12,6 +12,8 @@ import { GetAllQAByUser } from '../controllers/GetAllQAByUser';
 import { PostCheckCorrAns } from '../controllers/PostCheckCorrAns';
 import { GetIdLessMaxById } from '../controllers/GetIdLessMaxById';
 import { GetFindCorrAns } from '../controllers/GetFindCorrAns';
+import { PostRegisterUser } from '../controllers/PostRegisterUser';
+import PostLoginUser from '../controllers/PostLoginUser';
 
 
 
@@ -30,6 +32,8 @@ let web = (app) => {
     router.post('/api/PostCheckCorrAns', PostCheckCorrAns);
     router.get('/api/GetIdLessMaxById', GetIdLessMaxById);
     router.get('/api/GetFindCorrAns', GetFindCorrAns);
+    router.post('/api/PostRegisterUser', PostRegisterUser);
+    router.post('/api/PostLoginUser', PostLoginUser);
 
 
     router.get('/', (req, res) => {
