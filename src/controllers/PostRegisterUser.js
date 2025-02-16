@@ -1,4 +1,3 @@
-const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const salt = bcrypt.genSaltSync(10);
 const { ApiRegisterUser } = require('../api/UserApiQues');
@@ -17,8 +16,7 @@ const PostRegisterUser = async (req, res) => {
         role: data.role,
         email: data.email,
         password: data.password,
-        image: data.image,
-        signature: crypto.randomBytes(64).toString('hex')
+        image: data.image
     });
     if (api === 0) {
         return res.status(200).json({

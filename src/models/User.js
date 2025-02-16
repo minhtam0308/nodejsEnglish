@@ -18,8 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         role: DataTypes.CHAR(100),
         image: DataTypes.BLOB('medium'),
         email: DataTypes.STRING,
-        password: DataTypes.STRING,
-        signature: DataTypes.STRING
+        password: DataTypes.STRING
 
 
     }, {

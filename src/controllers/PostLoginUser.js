@@ -1,6 +1,7 @@
 import { apiLogInUser } from "../api/UserApiQues";
 import { GetToken } from "../handleCommon/GetToken";
 const bcrypt = require('bcryptjs');
+require('dotenv').config()
 
 const PostLoginUser = async (req, res) => {
     let data = req.body;
@@ -21,12 +22,13 @@ const PostLoginUser = async (req, res) => {
                     id: api.id,
                     exp: Date.now() + 3600000000
                 };
-                let signature = api.signature;
+                let signature = process.env.SIGNATURE;
+
                 let token = GetToken(header, payload, signature);
                 return res.status(200).json({
                     EC: 0,
                     EM: "Login Success",
-                    token: token
+                    token: `Bearer ${token}`,
 
                 })
             } else {

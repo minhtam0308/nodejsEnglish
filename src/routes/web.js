@@ -14,12 +14,17 @@ import { GetIdLessMaxById } from '../controllers/GetIdLessMaxById';
 import { GetFindCorrAns } from '../controllers/GetFindCorrAns';
 import { PostRegisterUser } from '../controllers/PostRegisterUser';
 import PostLoginUser from '../controllers/PostLoginUser';
+import { GetRefreshLogin } from '../controllers/GetRefreshLogin';
+import { middlewareAuth } from '../midleware/middlewareAuth';
 
 
 
 let router = express.Router();
 
 let web = (app) => {
+
+    router.all('*', middlewareAuth)
+
     router.post('/api/postCreateLession', createLession);
     router.get('/api/getAllLession', GetAllLession);
     router.post('/api/postUpdateLessById', PostUpdateLessById);
@@ -34,6 +39,7 @@ let web = (app) => {
     router.get('/api/GetFindCorrAns', GetFindCorrAns);
     router.post('/api/PostRegisterUser', PostRegisterUser);
     router.post('/api/PostLoginUser', PostLoginUser);
+    router.get('/api/GetRefreshLogin', GetRefreshLogin);
 
 
     router.get('/', (req, res) => {

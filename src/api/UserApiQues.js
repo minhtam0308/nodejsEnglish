@@ -114,7 +114,9 @@ const apiLogInUser = async (email) => {
         let res = await db.User.findOne({
             where: {
                 email: email
-            }
+            },
+            attributes: { exclude: ['updatedAt', 'createdAt'] }
+
         })
         return res;
     } catch (e) {
@@ -122,6 +124,19 @@ const apiLogInUser = async (email) => {
     }
 }
 
+const apiGetrefreshLogin = async (id) => {
+    try {
+        let res = await db.User.findOne({
+            where: { id: id },
+            attributes: { exclude: ['password', 'updatedAt', 'createdAt'] }
+        }
+        );
+        return res
+
+    } catch (e) {
+        console.log(e);
+    }
+}
 
 
 module.exports = {
@@ -130,5 +145,6 @@ module.exports = {
     apiGetMaxTimeLessById,
     apiFindCorrAns,
     ApiRegisterUser,
-    apiLogInUser
+    apiLogInUser,
+    apiGetrefreshLogin
 }
