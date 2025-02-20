@@ -2,7 +2,7 @@ import express from 'express'
 import { createLession } from '../controllers/CreateLesstion';
 import { GetAllLession } from '../controllers/GetAllLession';
 import { PostUpdateLessById } from '../controllers/PostUpdateLessById';
-; import { PostDeleteLessById } from '../controllers/PostDeleteLessById';
+import { PostDeleteLessById } from '../controllers/PostDeleteLessById';
 import { PostCreateQuestion } from '../controllers/PostCreateQuestion';
 import { PostDeleteQuesById } from '../controllers/PostDeleteQuesById';
 import { PostUpdateQuestion } from '../controllers/PostUpdateQestion';
@@ -16,6 +16,8 @@ import { PostRegisterUser } from '../controllers/PostRegisterUser';
 import PostLoginUser from '../controllers/PostLoginUser';
 import { GetRefreshLogin } from '../controllers/GetRefreshLogin';
 import { middlewareAuth } from '../midleware/middlewareAuth';
+import { PostSendEmail } from '../controllers/PostSendEmail';
+import { PutUpdateVerify } from '../controllers/PutUpdateVerify';
 
 
 
@@ -40,6 +42,9 @@ let web = (app) => {
     router.post('/api/PostRegisterUser', PostRegisterUser);
     router.post('/api/PostLoginUser', PostLoginUser);
     router.get('/api/GetRefreshLogin', GetRefreshLogin);
+    router.post('/api/PostSendEmail', PostSendEmail);
+    router.put('/api/PutUpdateVerify', PutUpdateVerify);
+
 
 
     router.get('/', (req, res) => {

@@ -31,7 +31,8 @@ const PostLoginUser = async (req, res) => {
                     token: `Bearer ${token}`,
 
                 })
-            } else {
+            }
+            else {
                 return res.status(200).json({
                     EC: 3,
                     EM: "Your PassWord Is Not Correct"
@@ -40,7 +41,7 @@ const PostLoginUser = async (req, res) => {
         } else {
             return res.status(200).json({
                 EC: 2,
-                EM: "Email not exist"
+                EM: "Email not exist/ Not Verify"
             })
         }
     }

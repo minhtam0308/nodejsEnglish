@@ -1,11 +1,10 @@
 
 import { createHmac } from "crypto"
-import { apiGetrefreshLogin } from "../api/UserApiQues";
 require('dotenv').config()
 
 
 export const middlewareAuth = (req, res, next) => {
-    const while_list = ['/', '/api/PostRegisterUser', '/api/PostLoginUser'];
+    const while_list = ['/', '/api/PostRegisterUser', '/api/PostLoginUser', '/api/PostSendEmail', '/api/PutUpdateVerify'];
     if (while_list.find((val) => val === req.originalUrl)) {
         next();
         return;

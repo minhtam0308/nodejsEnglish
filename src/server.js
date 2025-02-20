@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 //enables cors
 app.use(cors({
-    'origin': 'http://localhost:3000',
+    'origin': process.env.HOST_USER,
 }));
 
 web(app)

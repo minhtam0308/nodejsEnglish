@@ -1,6 +1,7 @@
 
 //dung require moi co du doan
-const db = require('../models')
+const db = require('../models');
+const { v4: uuidv4 } = require('uuid');
 
 const apiUserGetQAByidLess = async (id) => {
     try {
@@ -94,10 +95,24 @@ const apiFindCorrAns = async (idQues) => {
 const ApiRegisterUser = async (data) => {
     try {
         let existEmail = await db.User.findOne({
-            where: { email: data.email }
+            where: {
+                email: data.email,
+            },
+            raw: false
+
         });
-        if (existEmail) {
+        if (existEmail?.status === 1 || existEmail?.status === true) {
             return 1;
+        }
+        data.token = uuidv4();
+
+        if (existEmail?.status === 0 || existEmail?.status === false) {
+            existEmail.image = data.image;
+            existEmail.password = data.password;
+            existEmail.userName = data.UserName;
+            existEmail.token = data.token;
+            await existEmail.save();
+            return 0;
         }
 
         await db.User.create(data);
@@ -113,7 +128,8 @@ const apiLogInUser = async (email) => {
 
         let res = await db.User.findOne({
             where: {
-                email: email
+                email: email,
+                status: 1
             },
             attributes: { exclude: ['updatedAt', 'createdAt'] }
 
@@ -138,6 +154,30 @@ const apiGetrefreshLogin = async (id) => {
     }
 }
 
+const apiUpdateStatusVerify = async (token_verify, idtk) => {
+    try {
+        let res = await db.User.findOne({
+            where: {
+                id: idtk,
+                token: token_verify
+            },
+            raw: false
+        }
+        );
+        // console.log(res.status);
+        if (res.status === 0 || res.status === false) {
+            res.status = 1;
+            await res.save();
+            return 0;
+        } else {
+
+            return 1;
+        }
+
+    } catch (e) {
+        console.log(e);
+    }
+}
 
 module.exports = {
     apiUserGetQAByidLess,
@@ -146,5 +186,6 @@ module.exports = {
     apiFindCorrAns,
     ApiRegisterUser,
     apiLogInUser,
-    apiGetrefreshLogin
+    apiGetrefreshLogin,
+    apiUpdateStatusVerify
 }
