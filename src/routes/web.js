@@ -18,6 +18,7 @@ import { GetRefreshLogin } from '../controllers/GetRefreshLogin';
 import { middlewareAuth } from '../midleware/middlewareAuth';
 import { PostSendEmail } from '../controllers/PostSendEmail';
 import { PutUpdateVerify } from '../controllers/PutUpdateVerify';
+import { PutChangePass } from '../controllers/PutChangePass';
 
 
 
@@ -44,6 +45,8 @@ let web = (app) => {
     router.get('/api/GetRefreshLogin', GetRefreshLogin);
     router.post('/api/PostSendEmail', PostSendEmail);
     router.put('/api/PutUpdateVerify', PutUpdateVerify);
+    router.put('/api/PutChangePass', PutChangePass);
+
 
 
 

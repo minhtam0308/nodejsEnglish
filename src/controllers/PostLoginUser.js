@@ -1,4 +1,4 @@
-import { apiLogInUser } from "../api/UserApiQues";
+import { apiLogInUser } from "../api/apiUser";
 import { GetToken } from "../handleCommon/GetToken";
 const bcrypt = require('bcryptjs');
 require('dotenv').config()

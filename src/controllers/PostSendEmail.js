@@ -1,12 +1,12 @@
 
 const nodemailer = require("nodemailer");
-const { apiLogInUser } = require("../api/UserApiQues");
+const { apiGetUserToVerify } = require("../api/apiUser");
 require('dotenv').config();
 
 
 const PostSendEmail = async (req, res) => {
     if (req.body?.email) {
-        let api = await apiLogInUser(req.body.email);
+        let api = await apiGetUserToVerify(req.body.email);
 
         const transporter = nodemailer.createTransport({
             host: "smtp.gmail.com",

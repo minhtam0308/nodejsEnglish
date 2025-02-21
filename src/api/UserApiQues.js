@@ -92,100 +92,10 @@ const apiFindCorrAns = async (idQues) => {
 
 //thu viet hoa
 
-const ApiRegisterUser = async (data) => {
-    try {
-        let existEmail = await db.User.findOne({
-            where: {
-                email: data.email,
-            },
-            raw: false
-
-        });
-        if (existEmail?.status === 1 || existEmail?.status === true) {
-            return 1;
-        }
-        data.token = uuidv4();
-
-        if (existEmail?.status === 0 || existEmail?.status === false) {
-            existEmail.image = data.image;
-            existEmail.password = data.password;
-            existEmail.userName = data.UserName;
-            existEmail.token = data.token;
-            await existEmail.save();
-            return 0;
-        }
-
-        await db.User.create(data);
-        return 0;
-    } catch (e) {
-        console.log(e);
-        return 2;
-    }
-}
-
-const apiLogInUser = async (email) => {
-    try {
-
-        let res = await db.User.findOne({
-            where: {
-                email: email,
-                status: 1
-            },
-            attributes: { exclude: ['updatedAt', 'createdAt'] }
-
-        })
-        return res;
-    } catch (e) {
-        console.log(e);
-    }
-}
-
-const apiGetrefreshLogin = async (id) => {
-    try {
-        let res = await db.User.findOne({
-            where: { id: id },
-            attributes: { exclude: ['password', 'updatedAt', 'createdAt'] }
-        }
-        );
-        return res
-
-    } catch (e) {
-        console.log(e);
-    }
-}
-
-const apiUpdateStatusVerify = async (token_verify, idtk) => {
-    try {
-        let res = await db.User.findOne({
-            where: {
-                id: idtk,
-                token: token_verify
-            },
-            raw: false
-        }
-        );
-        // console.log(res.status);
-        if (res.status === 0 || res.status === false) {
-            res.status = 1;
-            await res.save();
-            return 0;
-        } else {
-
-            return 1;
-        }
-
-    } catch (e) {
-        console.log(e);
-    }
-}
-
 module.exports = {
     apiUserGetQAByidLess,
     apiCheckCorrAns,
     apiGetMaxTimeLessById,
     apiFindCorrAns,
-    ApiRegisterUser,
-    apiLogInUser,
-    apiGetrefreshLogin,
-    apiUpdateStatusVerify
+
 }

@@ -1,4 +1,4 @@
-const { apiUpdateStatusVerify } = require("../api/UserApiQues")
+const { apiUpdateStatusVerify } = require("../api/apiUser");
 
 const PutUpdateVerify = async (req, res) => {
 

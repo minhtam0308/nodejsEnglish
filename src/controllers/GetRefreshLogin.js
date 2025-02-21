@@ -1,4 +1,4 @@
-const { apiGetrefreshLogin } = require("../api/UserApiQues")
+import { apiGetrefreshLogin } from "../api/apiUser";
 
 export const GetRefreshLogin = async (req, res) => {
     const api = await apiGetrefreshLogin(req?.body?.idRefreshToken);

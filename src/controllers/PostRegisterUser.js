@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
+const { ApiRegisterUser } = require('../api/apiUser');
 const salt = bcrypt.genSaltSync(10);
-const { ApiRegisterUser } = require('../api/UserApiQues');
 const PostRegisterUser = async (req, res) => {
     let data = req.body;
     if (!data.userName || !data.role || !data.email || !data.password) {
