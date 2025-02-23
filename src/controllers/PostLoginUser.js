@@ -15,11 +15,12 @@ const PostLoginUser = async (req, res) => {
         if (api) {
             if (bcrypt.compareSync(data.password, api.password)) {
                 let header = {
-                    "alg": "HS246",
+                    "alg": "HS256",
                     "typ": "JWT"
                 };
                 let payload = {
                     id: api.id,
+                    role: api.role,
                     exp: Date.now() + 3600000000
                 };
                 let signature = process.env.SIGNATURE;

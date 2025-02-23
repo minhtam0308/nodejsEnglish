@@ -22,6 +22,10 @@ module.exports = {
             level: {
                 type: Sequelize.INTEGER
             },
+            id_teacher: {
+                type: Sequelize.INTEGER
+
+            },
             deleteAt: {
                 allowNull: true,
                 type: Sequelize.DATE

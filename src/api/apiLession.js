@@ -1,6 +1,5 @@
 
-import db from '../models'
-
+const db = require('../models')
 
 const apiCreateLession = async (data) => {
 
@@ -12,7 +11,8 @@ const apiCreateLession = async (data) => {
             title: data.title,
             image: data.image,
             description: data.description,
-            level: data.level
+            level: data.level,
+            id_teacher: data.idRefreshToken
         });
         return "Create Lession Success";
     } catch (e) {
@@ -21,10 +21,42 @@ const apiCreateLession = async (data) => {
     }
 }
 
+//user
 const apiGetAllLession = async () => {
     try {
+        let res = [];
+        let teachers = await db.User.findAll(
+            {
+                where: { role: "ADMIN" },
+                attributes: ['userName', 'id', 'image']
+
+            }
+
+        );
+        for (let i = 0; i < teachers.length; i++) {
+            let lession = await db.Lession.findAll({
+                where: { id_teacher: teachers[i].id }
+            })
+            let temp = teachers[i];
+            res.push({ teacher: temp, lession: lession });
+        }
+
+        return res;
+    } catch (e) {
+        console.log("loi", e);
+    }
+}
+
+//teacher
+const apiGetAllLessionByTeach = async (id_teacher) => {
+    try {
         const res = await db.Lession.findAll(
-            { where: { deleteAt: null } }
+            {
+                where: {
+                    deleteAt: null,
+                    id_teacher: id_teacher
+                }
+            }
         );
         return res;
     } catch (e) {
@@ -80,6 +112,7 @@ module.exports = {
     apiCreateLession,
     apiGetAllLession,
     apiChangeLessById,
-    apiDeleteLessByid
+    apiDeleteLessByid,
+    apiGetAllLessionByTeach
 
 };

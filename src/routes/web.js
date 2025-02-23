@@ -19,6 +19,7 @@ import { middlewareAuth } from '../midleware/middlewareAuth';
 import { PostSendEmail } from '../controllers/PostSendEmail';
 import { PutUpdateVerify } from '../controllers/PutUpdateVerify';
 import { PutChangePass } from '../controllers/PutChangePass';
+import { GetAllLessionTeach } from '../controllers/Teacher/GetAllLessionTeach';
 
 
 
@@ -46,6 +47,7 @@ let web = (app) => {
     router.post('/api/PostSendEmail', PostSendEmail);
     router.put('/api/PutUpdateVerify', PutUpdateVerify);
     router.put('/api/PutChangePass', PutChangePass);
+    router.get('/api/GetAllLessionTeach', GetAllLessionTeach);
 
 
 

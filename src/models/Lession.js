@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         image: DataTypes.BLOB('medium'),
         description: DataTypes.TEXT,
         level: DataTypes.INTEGER,
+        id_teacher: DataTypes.INTEGER,
         deleteAt: DataTypes.DATE
     }, {
         sequelize,
