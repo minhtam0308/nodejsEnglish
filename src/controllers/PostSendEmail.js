@@ -42,7 +42,7 @@ const PostSendEmail = async (req, res) => {
             Vui lòng nhấn vào nút dưới đây để xác thực địa chỉ email của Quý khách:
         </p>
         <a 
-        href="${process.env.HOST_USER}/verify?token_verify=${api.token}&idtk=${api.id}" 
+        href="${process.env.HOST_FRONTEND}/verify?token_verify=${api.token}&idtk=${api.id}" 
         class="btn btn-custom" style="  
         background-color: #00bfff;
         color: #000080;

@@ -1,0 +1,10 @@
+
+//Cần file này để báo là đã đổi json thành js nếu không có file config vẫn chạy đc nhưng sẽ không lấy đc biến trong file .env(undefine như phần comment trong file config.js) do không chạy được require('dotenv').config(); 
+
+const path = require('path');
+
+module.exports = {
+    'config': path.resolve('src/config', 'config.js'),
+    'models-path': path.resolve('src', 'models'),
+    'migrations-path': path.resolve('src', 'migrations'),
+}

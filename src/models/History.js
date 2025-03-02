@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
         idAns: DataTypes.INTEGER,
         idQues: DataTypes.INTEGER,
         idLess: DataTypes.INTEGER,
-        tdtk: DataTypes.INTEGER
+        idtk: DataTypes.INTEGER
     }, {
         sequelize,
         modelName: 'History',

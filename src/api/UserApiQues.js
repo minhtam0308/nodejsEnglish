@@ -37,7 +37,7 @@ const apiUserGetQAByidLess = async (id) => {
 }
 
 
-const apiCheckCorrAns = async (idAns, idQues, idLess, time) => {
+const apiCheckCorrAns = async (idAns, idQues, idLess, time, idtk) => {
 
     try {
         let corr = await db.Answer.findByPk(idAns);
@@ -46,7 +46,8 @@ const apiCheckCorrAns = async (idAns, idQues, idLess, time) => {
             correct: corr.is_true,
             idAns: idAns,
             idQues: idQues,
-            idLess: idLess
+            idLess: idLess,
+            idtk: idtk
         })
         return corr;
     } catch (e) {

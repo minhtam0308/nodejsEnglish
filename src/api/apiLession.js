@@ -35,7 +35,11 @@ const apiGetAllLession = async () => {
         );
         for (let i = 0; i < teachers.length; i++) {
             let lession = await db.Lession.findAll({
-                where: { id_teacher: teachers[i].id }
+                where: {
+                    id_teacher: teachers[i].id,
+                    deleteAt: null
+
+                }
             })
             let temp = teachers[i];
             res.push({ teacher: temp, lession: lession });

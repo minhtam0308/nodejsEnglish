@@ -1,16 +1,22 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import { web } from './routes/web'
-const { ConnectDB } = require('./config/connectDB');
-const cors = require('cors');
+"use strict";
 
-require('dotenv').config()
-
-let app = express();
+var _express = _interopRequireDefault(require("express"));
+var _bodyParser = _interopRequireDefault(require("body-parser"));
+var _web = require("./routes/web");
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
+var _require = require('./config/connectDB'),
+  ConnectDB = _require.ConnectDB;
+var cors = require('cors');
+require('dotenv').config();
+var app = (0, _express["default"])();
 
 //display data when post (req.body)
-app.use(bodyParser.json({ limit: '3mb' }))
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(_bodyParser["default"].json({
+  limit: '3mb'
+}));
+app.use(_bodyParser["default"].urlencoded({
+  extended: true
+}));
 
 // CORS error
 // app.use(function (req, res, next) {
@@ -29,16 +35,13 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 //enables cors
 app.use(cors({
-    'origin': process.env.HOST_FRONTEND,
+  'origin': process.env.HOST_FRONTEND
 }));
-
-web(app)
+(0, _web.web)(app);
 
 //test connect db
-ConnectDB()
-
-let port = process.env.PORT;
-
-app.listen(port, () => {
-    console.log('app running on port ', port)
-})
+ConnectDB();
+var port = process.env.PORT;
+app.listen(port, function () {
+  console.log('app running on port ', port);
+});
