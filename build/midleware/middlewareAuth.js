@@ -21,7 +21,7 @@ var middlewareAuth = exports.middlewareAuth = function middlewareAuth(req, res, 
     if (token.length === 3) {
       var hash = (0, _crypto.createHmac)('sha256', process.env.SIGNATURE).update("".concat(token[0], ".").concat(token[1])).digest('hex');
       if (hash === token[2]) {
-        var infor = JSON.parse(atob(token[1]));
+        var infor = JSON.parse(Buffer.from(token[1], 'base64').toString());
         if (infor.role === 'USER' && admin_list.find(function (val) {
           return val === req.originalUrl;
         })) {

@@ -3,7 +3,7 @@
 var _crypto = require("crypto");
 var GetBase64url = function GetBase64url(object) {
   var objactEncoded = JSON.stringify(object);
-  return btoa(objactEncoded).replace(/\+/g, '-').replace(/\=/g, '').replace(/\//g, '-');
+  return Buffer.from(objactEncoded).toString('base64').replace(/\+/g, '-').replace(/\=/g, '').replace(/\//g, '-');
 };
 var GetToken = function GetToken(header, payload, signature) {
   var headerEncoded = GetBase64url(header);

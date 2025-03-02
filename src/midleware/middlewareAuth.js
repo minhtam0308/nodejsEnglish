@@ -27,7 +27,7 @@ export const middlewareAuth = (req, res, next) => {
         if (token.length === 3) {
             let hash = createHmac('sha256', process.env.SIGNATURE).update(`${token[0]}.${token[1]}`).digest('hex');
             if (hash === token[2]) {
-                let infor = JSON.parse(atob(token[1]));
+                let infor = JSON.parse(Buffer.from(token[1], 'base64').toString());
                 if (infor.role === 'USER' && (admin_list.find((val) => val === req.originalUrl))) {
                     return res.status(401).json({
                         EC: 1,

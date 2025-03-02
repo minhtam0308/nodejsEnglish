@@ -2,7 +2,7 @@ import { createHmac } from "crypto"
 
 const GetBase64url = (object) => {
     let objactEncoded = JSON.stringify(object);
-    return btoa(objactEncoded).replace(/\+/g, '-').replace(/\=/g, '').replace(/\//g, '-');
+    return Buffer.from(objactEncoded).toString('base64').replace(/\+/g, '-').replace(/\=/g, '').replace(/\//g, '-');
 }
 
 const GetToken = (header, payload, signature) => {
