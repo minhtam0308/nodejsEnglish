@@ -107,7 +107,7 @@ var apiCheckCorrAns = /*#__PURE__*/function () {
   };
 }();
 var apiGetMaxTimeLessById = /*#__PURE__*/function () {
-  var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(id) {
+  var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(id, idtk) {
     var res;
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
@@ -116,7 +116,8 @@ var apiGetMaxTimeLessById = /*#__PURE__*/function () {
           _context3.next = 3;
           return db.History.max('time', {
             where: {
-              idLess: id
+              idLess: id,
+              idtk: idtk
             }
           });
         case 3:
@@ -132,7 +133,7 @@ var apiGetMaxTimeLessById = /*#__PURE__*/function () {
       }
     }, _callee3, null, [[0, 7]]);
   }));
-  return function apiGetMaxTimeLessById(_x7) {
+  return function apiGetMaxTimeLessById(_x7, _x8) {
     return _ref3.apply(this, arguments);
   };
 }();
@@ -175,7 +176,7 @@ var apiFindCorrAns = /*#__PURE__*/function () {
       }
     }, _callee4, null, [[0, 10]]);
   }));
-  return function apiFindCorrAns(_x8) {
+  return function apiFindCorrAns(_x9) {
     return _ref4.apply(this, arguments);
   };
 }();

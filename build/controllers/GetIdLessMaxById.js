@@ -16,7 +16,7 @@ var GetIdLessMaxById = /*#__PURE__*/function () {
             break;
           }
           _context.next = 3;
-          return (0, _UserApiQues.apiGetMaxTimeLessById)(req.query.id);
+          return (0, _UserApiQues.apiGetMaxTimeLessById)(req.query.id, req.body.idRefreshToken);
         case 3:
           api = _context.sent;
           return _context.abrupt("return", res.status(200).json({

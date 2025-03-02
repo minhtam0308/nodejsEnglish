@@ -54,11 +54,12 @@ const apiCheckCorrAns = async (idAns, idQues, idLess, time, idtk) => {
         console.log(e);
     }
 }
-const apiGetMaxTimeLessById = async (id) => {
+const apiGetMaxTimeLessById = async (id, idtk) => {
     try {
         let res = await db.History.max('time', {
             where: {
-                idLess: id
+                idLess: id,
+                idtk: idtk
             }
         })
         return res;
