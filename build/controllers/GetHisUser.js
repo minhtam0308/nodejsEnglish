@@ -22,7 +22,8 @@ var GetHisUser = /*#__PURE__*/function () {
           }
           return _context.abrupt("return", res.status(200).json({
             EC: 0,
-            EM: "get History success"
+            EM: "get History success",
+            his: api
           }));
         case 7:
           return _context.abrupt("return", res.status(200).json({

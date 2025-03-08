@@ -5,7 +5,8 @@ const GetHisUser = async (req, res) => {
     if (api) {
         return res.status(200).json({
             EC: 0,
-            EM: "get History success"
+            EM: "get History success",
+            his: api
         })
     } else {
         return res.status(200).json({
