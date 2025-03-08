@@ -92,12 +92,44 @@ const apiFindCorrAns = async (idQues) => {
     }
 }
 
-//thu viet hoa
+//this api is temporary
+const apiGetHis = async (idtk) => {
+    try {
+        let final = [];
+        let resHis = await db.History.findAll({
+            where: { idtk: idtk },
+            group: ["idLess", "time"],
+            attributes: ['idLess',
+                "time",
+                [db.sequelize.fn('count', db.sequelize.col('correct')), 'countQues'],
+                [db.sequelize.fn('sum', db.sequelize.col('correct')), 'countCorrect'],
+                [db.sequelize.fn('min', db.sequelize.col('createdAt')), 'startAt'],
+                [db.sequelize.fn('max', db.sequelize.col('createdAt')), 'finishAt']
+            ]
+        })
+
+        for (let i = 0; i < resHis.length; i++) {
+            let resLess = await db.Lession.findOne({
+                where: { id: resHis[i].idLess, deleteAt: null }
+            });
+            final = [...final, {
+                HisInfor: resHis[i],
+                LessInfor: resLess
+            }]
+        }
+
+        return final;
+    } catch (e) {
+        console.log("error from apiGetHis", e);
+        return null;
+    }
+}
 
 module.exports = {
     apiUserGetQAByidLess,
     apiCheckCorrAns,
     apiGetMaxTimeLessById,
     apiFindCorrAns,
+    apiGetHis
 
 }
