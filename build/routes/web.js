@@ -21,6 +21,7 @@ var _PostSendEmail = require("../controllers/PostSendEmail");
 var _PutUpdateVerify = require("../controllers/PutUpdateVerify");
 var _PutChangePass = require("../controllers/PutChangePass");
 var _GetAllLessionTeach = require("../controllers/Teacher/GetAllLessionTeach");
+var _GetHisUser = require("../controllers/GetHisUser");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 var router = _express["default"].Router();
 var web = function web(app) {
@@ -44,6 +45,7 @@ var web = function web(app) {
   router.put('/api/PutUpdateVerify', _PutUpdateVerify.PutUpdateVerify);
   router.put('/api/PutChangePass', _PutChangePass.PutChangePass);
   router.get('/api/GetAllLessionTeach', _GetAllLessionTeach.GetAllLessionTeach);
+  router.get('/api/GetHisUser', _GetHisUser.GetHisUser);
   router.get('/', function (req, res) {
     return res.send('test');
   });

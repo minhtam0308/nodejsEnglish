@@ -10,7 +10,7 @@ module.exports = {
     "host": process.env.HOST_PRO,
     "dialect": "mysql",
     "port": process.env.PORT_DB,
-    // phải viết dõ nếu chưa có file .sequelizerc chỉ khi sử dụng npx sequelize-cli db:migrate do nó chỉ đọc file config.json chứ k đọc js
+    // phải viết rõ nếu chưa có file .sequelizerc chỉ khi sử dụng npx sequelize-cli db:migrate do nó chỉ đọc file config.json chứ k đọc js
     // "username": 'avna...',
     // "password": 'AVNS_TW... ',
     // "database": 'englishDB',
@@ -26,9 +26,14 @@ module.exports = {
   "test": {
     "username": "root",
     "password": null,
-    "database": "database_test",
+    "database": "backendenglish",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "logging": false,
+    "query": {
+      "raw": true
+    },
+    "timezone": "+07:00"
   },
   "production": {
     "username": process.env.HOST_PRO_USERNAME,
