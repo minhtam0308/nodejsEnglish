@@ -21,6 +21,7 @@ import { PutUpdateVerify } from '../controllers/PutUpdateVerify';
 import { PutChangePass } from '../controllers/PutChangePass';
 import { GetAllLessionTeach } from '../controllers/Teacher/GetAllLessionTeach';
 import { GetHisUser } from '../controllers/GetHisUser';
+import { PutChangeInforUser } from '../controllers/PutChangeInforUser';
 
 
 
@@ -50,7 +51,7 @@ let web = (app) => {
     router.put('/api/PutChangePass', PutChangePass);
     router.get('/api/GetAllLessionTeach', GetAllLessionTeach);
     router.get('/api/GetHisUser', GetHisUser);
-
+    router.put('/api/PutChangeInforUser', PutChangeInforUser);
 
 
 

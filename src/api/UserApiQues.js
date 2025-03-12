@@ -112,10 +112,10 @@ const apiGetHis = async (idtk) => {
             let resLess = await db.Lession.findOne({
                 where: { id: resHis[i].idLess, deleteAt: null }
             });
-            final = [...final, {
+            final = [{
                 HisInfor: resHis[i],
                 LessInfor: resLess
-            }]
+            }, ...final]
         }
 
         return final;
@@ -125,11 +125,27 @@ const apiGetHis = async (idtk) => {
     }
 }
 
+const apiChangeInforUser = async (id, userName, imageUser) => {
+    try {
+        let res = await db.User.findOne({
+            where: { id },
+            raw: false
+        })
+        res.userName = userName;
+        res.image = imageUser;
+        await res.save();
+        return 1;
+    } catch (e) {
+        console.log("error from apiChangeInforUser", e);
+        return null;
+    }
+}
 module.exports = {
     apiUserGetQAByidLess,
     apiCheckCorrAns,
     apiGetMaxTimeLessById,
     apiFindCorrAns,
-    apiGetHis
+    apiGetHis,
+    apiChangeInforUser
 
 }
