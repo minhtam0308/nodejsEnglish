@@ -30,7 +30,7 @@ const PostLoginUser = async (req, res) => {
                     EC: 0,
                     EM: "Login Success",
                     token: `Bearer ${token}`,
-
+                    role: api.role
                 })
             }
             else {

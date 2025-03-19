@@ -54,7 +54,8 @@ var PostLoginUser = /*#__PURE__*/function () {
           return _context.abrupt("return", res.status(200).json({
             EC: 0,
             EM: "Login Success",
-            token: "Bearer ".concat(token)
+            token: "Bearer ".concat(token),
+            role: api.role
           }));
         case 17:
           return _context.abrupt("return", res.status(200).json({

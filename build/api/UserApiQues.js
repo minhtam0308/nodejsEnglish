@@ -202,7 +202,9 @@ var apiGetHis = /*#__PURE__*/function () {
               idtk: idtk
             },
             group: ["idLess", "time"],
+            order: [['startAt', 'DESC']],
             attributes: ['idLess', "time", [db.sequelize.fn('count', db.sequelize.col('correct')), 'countQues'], [db.sequelize.fn('sum', db.sequelize.col('correct')), 'countCorrect'], [db.sequelize.fn('min', db.sequelize.col('createdAt')), 'startAt'], [db.sequelize.fn('max', db.sequelize.col('createdAt')), 'finishAt']]
+            // logging: true
           });
         case 4:
           resHis = _context5.sent;
@@ -221,10 +223,10 @@ var apiGetHis = /*#__PURE__*/function () {
           });
         case 9:
           resLess = _context5.sent;
-          _final = [{
+          _final = [].concat(_toConsumableArray(_final), [{
             HisInfor: resHis[i],
             LessInfor: resLess
-          }].concat(_toConsumableArray(_final));
+          }]);
         case 11:
           i++;
           _context5.next = 6;
@@ -283,11 +285,107 @@ var apiChangeInforUser = /*#__PURE__*/function () {
     return _ref6.apply(this, arguments);
   };
 }();
+var apiGet5His = /*#__PURE__*/function () {
+  var _ref7 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee7(idtk) {
+    var _final2, resHis, i, resLess;
+    return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+      while (1) switch (_context7.prev = _context7.next) {
+        case 0:
+          _context7.prev = 0;
+          _final2 = [];
+          _context7.next = 4;
+          return db.History.findAll({
+            where: {
+              idtk: idtk
+            },
+            group: ["idLess", "time"],
+            order: [['startAt', 'DESC']],
+            //not createAt diffirent name
+            limit: 5,
+            attributes: ['idLess', "time", [db.sequelize.fn('count', db.sequelize.col('correct')), 'countQues'], [db.sequelize.fn('sum', db.sequelize.col('correct')), 'countCorrect'], [db.sequelize.fn('min', db.sequelize.col('createdAt')), 'startAt'], [db.sequelize.fn('max', db.sequelize.col('createdAt')), 'finishAt']]
+            // logging: true
+          });
+        case 4:
+          resHis = _context7.sent;
+          i = 0;
+        case 6:
+          if (!(i < resHis.length)) {
+            _context7.next = 14;
+            break;
+          }
+          _context7.next = 9;
+          return db.Lession.findOne({
+            where: {
+              id: resHis[i].idLess,
+              deleteAt: null
+            }
+          });
+        case 9:
+          resLess = _context7.sent;
+          _final2 = [].concat(_toConsumableArray(_final2), [{
+            HisInfor: resHis[i],
+            LessInfor: resLess
+          }]);
+        case 11:
+          i++;
+          _context7.next = 6;
+          break;
+        case 14:
+          return _context7.abrupt("return", _final2);
+        case 17:
+          _context7.prev = 17;
+          _context7.t0 = _context7["catch"](0);
+          console.log("error from get5his: ", _context7.t0);
+          return _context7.abrupt("return", null);
+        case 21:
+        case "end":
+          return _context7.stop();
+      }
+    }, _callee7, null, [[0, 17]]);
+  }));
+  return function apiGet5His(_x14) {
+    return _ref7.apply(this, arguments);
+  };
+}();
+var apiDelHisUser = /*#__PURE__*/function () {
+  var _ref8 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee8(time, idLess, idtk) {
+    var res;
+    return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+      while (1) switch (_context8.prev = _context8.next) {
+        case 0:
+          _context8.prev = 0;
+          _context8.next = 3;
+          return db.History.destroy({
+            where: {
+              time: time,
+              idLess: idLess,
+              idtk: idtk
+            }
+          });
+        case 3:
+          res = _context8.sent;
+          return _context8.abrupt("return", res);
+        case 7:
+          _context8.prev = 7;
+          _context8.t0 = _context8["catch"](0);
+          console.log(_context8.t0);
+        case 10:
+        case "end":
+          return _context8.stop();
+      }
+    }, _callee8, null, [[0, 7]]);
+  }));
+  return function apiDelHisUser(_x15, _x16, _x17) {
+    return _ref8.apply(this, arguments);
+  };
+}();
 module.exports = {
   apiUserGetQAByidLess: apiUserGetQAByidLess,
   apiCheckCorrAns: apiCheckCorrAns,
   apiGetMaxTimeLessById: apiGetMaxTimeLessById,
   apiFindCorrAns: apiFindCorrAns,
   apiGetHis: apiGetHis,
-  apiChangeInforUser: apiChangeInforUser
+  apiChangeInforUser: apiChangeInforUser,
+  apiGet5His: apiGet5His,
+  apiDelHisUser: apiDelHisUser
 };

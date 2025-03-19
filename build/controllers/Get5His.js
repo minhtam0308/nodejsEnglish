@@ -5,15 +5,15 @@ function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyri
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 var _require = require("../api/UserApiQues"),
-  apiGetHis = _require.apiGetHis;
-var GetHisUser = /*#__PURE__*/function () {
+  apiGet5His = _require.apiGet5His;
+var Get5His = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
     var api;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return apiGetHis(req.body.idRefreshToken);
+          return apiGet5His(req.body.idRefreshToken);
         case 2:
           api = _context.sent;
           if (!api) {
@@ -36,10 +36,10 @@ var GetHisUser = /*#__PURE__*/function () {
       }
     }, _callee);
   }));
-  return function GetHisUser(_x, _x2) {
+  return function Get5His(_x, _x2) {
     return _ref.apply(this, arguments);
   };
 }();
 module.exports = {
-  GetHisUser: GetHisUser
+  Get5His: Get5His
 };

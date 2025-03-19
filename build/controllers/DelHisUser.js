@@ -5,41 +5,50 @@ function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyri
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 var _require = require("../api/UserApiQues"),
-  apiGetHis = _require.apiGetHis;
-var GetHisUser = /*#__PURE__*/function () {
+  apiDelHisUser = _require.apiDelHisUser;
+var DelHisUser = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
-    var api;
+    var data, api;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          _context.next = 2;
-          return apiGetHis(req.body.idRefreshToken);
-        case 2:
+          data = req.body;
+          if (!(!data || !data.time || !data.idLess)) {
+            _context.next = 3;
+            break;
+          }
+          return _context.abrupt("return", res.status(200).json({
+            EC: 1,
+            EM: "Not Enough Data"
+          }));
+        case 3:
+          _context.next = 5;
+          return apiDelHisUser(data.time, data.idLess, data.idRefreshToken);
+        case 5:
           api = _context.sent;
           if (!api) {
-            _context.next = 7;
+            _context.next = 10;
             break;
           }
           return _context.abrupt("return", res.status(200).json({
             EC: 0,
-            EM: "get History success",
-            his: api
+            EM: "Delete success"
           }));
-        case 7:
+        case 10:
           return _context.abrupt("return", res.status(200).json({
-            EC: 1,
-            EM: "ERROR FROM BACKEND"
+            EC: 2,
+            EM: "History not exist"
           }));
-        case 8:
+        case 11:
         case "end":
           return _context.stop();
       }
     }, _callee);
   }));
-  return function GetHisUser(_x, _x2) {
+  return function DelHisUser(_x, _x2) {
     return _ref.apply(this, arguments);
   };
 }();
 module.exports = {
-  GetHisUser: GetHisUser
+  DelHisUser: DelHisUser
 };

@@ -1,7 +1,7 @@
-const { apiGetHis } = require("../api/UserApiQues")
+const { apiGet5His } = require("../api/UserApiQues");
 
-const GetHisUser = async (req, res) => {
-    let api = await apiGetHis(req.body.idRefreshToken);
+const Get5His = async (req, res) => {
+    let api = await apiGet5His(req.body.idRefreshToken);
     if (api) {
         return res.status(200).json({
             EC: 0,
@@ -14,9 +14,6 @@ const GetHisUser = async (req, res) => {
             EM: "ERROR FROM BACKEND"
         })
     }
-
 }
 
-module.exports = {
-    GetHisUser
-}
+module.exports = { Get5His };

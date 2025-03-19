@@ -99,23 +99,25 @@ const apiGetHis = async (idtk) => {
         let resHis = await db.History.findAll({
             where: { idtk: idtk },
             group: ["idLess", "time"],
+            order: [['startAt', 'DESC']],
             attributes: ['idLess',
                 "time",
                 [db.sequelize.fn('count', db.sequelize.col('correct')), 'countQues'],
                 [db.sequelize.fn('sum', db.sequelize.col('correct')), 'countCorrect'],
                 [db.sequelize.fn('min', db.sequelize.col('createdAt')), 'startAt'],
                 [db.sequelize.fn('max', db.sequelize.col('createdAt')), 'finishAt']
-            ]
+            ],
+            // logging: true
         })
 
         for (let i = 0; i < resHis.length; i++) {
             let resLess = await db.Lession.findOne({
                 where: { id: resHis[i].idLess, deleteAt: null }
             });
-            final = [{
+            final = [...final, {
                 HisInfor: resHis[i],
                 LessInfor: resLess
-            }, ...final]
+            }]
         }
 
         return final;
@@ -140,12 +142,63 @@ const apiChangeInforUser = async (id, userName, imageUser) => {
         return null;
     }
 }
+
+const apiGet5His = async (idtk) => {
+    try {
+        let final = [];
+        let resHis = await db.History.findAll({
+            where: { idtk: idtk },
+            group: ["idLess", "time"],
+            order: [['startAt', 'DESC']], //not createAt diffirent name
+            limit: 5,
+            attributes: ['idLess',
+                "time",
+                [db.sequelize.fn('count', db.sequelize.col('correct')), 'countQues'],
+                [db.sequelize.fn('sum', db.sequelize.col('correct')), 'countCorrect'],
+                [db.sequelize.fn('min', db.sequelize.col('createdAt')), 'startAt'],
+                [db.sequelize.fn('max', db.sequelize.col('createdAt')), 'finishAt']
+            ],
+            // logging: true
+        })
+
+        for (let i = 0; i < resHis.length; i++) {
+            let resLess = await db.Lession.findOne({
+                where: { id: resHis[i].idLess, deleteAt: null }
+            });
+            final = [...final, {
+                HisInfor: resHis[i],
+                LessInfor: resLess
+            }]
+        }
+        // console.log(final);
+
+        return final;
+    } catch (e) {
+        console.log("error from get5his: ", e);
+        return null;
+    }
+}
+
+const apiDelHisUser = async (time, idLess, idtk) => {
+    try {
+        let res = await db.History.destroy({
+            where: {
+                time, idLess, idtk
+            }
+        })
+        return res;
+    } catch (e) {
+        console.log(e);
+    }
+}
 module.exports = {
     apiUserGetQAByidLess,
     apiCheckCorrAns,
     apiGetMaxTimeLessById,
     apiFindCorrAns,
     apiGetHis,
-    apiChangeInforUser
+    apiChangeInforUser,
+    apiGet5His,
+    apiDelHisUser
 
 }

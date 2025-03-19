@@ -23,6 +23,8 @@ var _PutChangePass = require("../controllers/PutChangePass");
 var _GetAllLessionTeach = require("../controllers/Teacher/GetAllLessionTeach");
 var _GetHisUser = require("../controllers/GetHisUser");
 var _PutChangeInforUser = require("../controllers/PutChangeInforUser");
+var _Get5His = require("../controllers/Get5His");
+var _DelHisUser = require("../controllers/DelHisUser");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 var router = _express["default"].Router();
 var web = function web(app) {
@@ -47,7 +49,9 @@ var web = function web(app) {
   router.put('/api/PutChangePass', _PutChangePass.PutChangePass);
   router.get('/api/GetAllLessionTeach', _GetAllLessionTeach.GetAllLessionTeach);
   router.get('/api/GetHisUser', _GetHisUser.GetHisUser);
+  router.get('/api/Get5His', _Get5His.Get5His);
   router.put('/api/PutChangeInforUser', _PutChangeInforUser.PutChangeInforUser);
+  router["delete"]('/api/DelHisUser', _DelHisUser.DelHisUser);
   router.get('/', function (req, res) {
     return res.send('test');
   });
