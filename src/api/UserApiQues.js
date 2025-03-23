@@ -102,7 +102,6 @@ const apiGetHis = async (idtk) => {
             order: [['startAt', 'DESC']],
             attributes: ['idLess',
                 "time",
-                [db.sequelize.fn('count', db.sequelize.col('correct')), 'countQues'],
                 [db.sequelize.fn('sum', db.sequelize.col('correct')), 'countCorrect'],
                 [db.sequelize.fn('min', db.sequelize.col('createdAt')), 'startAt'],
                 [db.sequelize.fn('max', db.sequelize.col('createdAt')), 'finishAt']
@@ -114,9 +113,17 @@ const apiGetHis = async (idtk) => {
             let resLess = await db.Lession.findOne({
                 where: { id: resHis[i].idLess, deleteAt: null }
             });
+            let countQues = await db.Question.findAll({
+                where: { id_lession: resHis[i].idLess },
+                group: ["id_lession"],
+                attributes: [
+                    [db.sequelize.fn('count', db.sequelize.col('id')), 'countQues']
+                ]
+            })
             final = [...final, {
                 HisInfor: resHis[i],
-                LessInfor: resLess
+                LessInfor: resLess,
+                countQues: countQues[0].countQues
             }]
         }
 
@@ -165,9 +172,17 @@ const apiGet5His = async (idtk) => {
             let resLess = await db.Lession.findOne({
                 where: { id: resHis[i].idLess, deleteAt: null }
             });
+            let countQues = await db.Question.findAll({
+                where: { id_lession: resHis[i].idLess },
+                group: ["id_lession"],
+                attributes: [
+                    [db.sequelize.fn('count', db.sequelize.col('id')), 'countQues']
+                ]
+            })
             final = [...final, {
                 HisInfor: resHis[i],
-                LessInfor: resLess
+                LessInfor: resLess,
+                countQues: countQues[0].countQues
             }]
         }
         // console.log(final);
