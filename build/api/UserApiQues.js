@@ -190,7 +190,7 @@ var apiFindCorrAns = /*#__PURE__*/function () {
 //this api is temporary
 var apiGetHis = /*#__PURE__*/function () {
   var _ref5 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5(idtk) {
-    var _final, resHis, i, resLess;
+    var _final, resHis, i, resLess, countQues;
     return _regeneratorRuntime().wrap(function _callee5$(_context5) {
       while (1) switch (_context5.prev = _context5.next) {
         case 0:
@@ -203,7 +203,7 @@ var apiGetHis = /*#__PURE__*/function () {
             },
             group: ["idLess", "time"],
             order: [['startAt', 'DESC']],
-            attributes: ['idLess', "time", [db.sequelize.fn('count', db.sequelize.col('correct')), 'countQues'], [db.sequelize.fn('sum', db.sequelize.col('correct')), 'countCorrect'], [db.sequelize.fn('min', db.sequelize.col('createdAt')), 'startAt'], [db.sequelize.fn('max', db.sequelize.col('createdAt')), 'finishAt']]
+            attributes: ['idLess', "time", [db.sequelize.fn('sum', db.sequelize.col('correct')), 'countCorrect'], [db.sequelize.fn('min', db.sequelize.col('createdAt')), 'startAt'], [db.sequelize.fn('max', db.sequelize.col('createdAt')), 'finishAt']]
             // logging: true
           });
         case 4:
@@ -211,7 +211,7 @@ var apiGetHis = /*#__PURE__*/function () {
           i = 0;
         case 6:
           if (!(i < resHis.length)) {
-            _context5.next = 14;
+            _context5.next = 17;
             break;
           }
           _context5.next = 9;
@@ -223,26 +223,37 @@ var apiGetHis = /*#__PURE__*/function () {
           });
         case 9:
           resLess = _context5.sent;
+          _context5.next = 12;
+          return db.Question.findAll({
+            where: {
+              id_lession: resHis[i].idLess
+            },
+            group: ["id_lession"],
+            attributes: [[db.sequelize.fn('count', db.sequelize.col('id')), 'countQues']]
+          });
+        case 12:
+          countQues = _context5.sent;
           _final = [].concat(_toConsumableArray(_final), [{
             HisInfor: resHis[i],
-            LessInfor: resLess
+            LessInfor: resLess,
+            countQues: countQues[0].countQues
           }]);
-        case 11:
+        case 14:
           i++;
           _context5.next = 6;
           break;
-        case 14:
-          return _context5.abrupt("return", _final);
         case 17:
-          _context5.prev = 17;
+          return _context5.abrupt("return", _final);
+        case 20:
+          _context5.prev = 20;
           _context5.t0 = _context5["catch"](0);
           console.log("error from apiGetHis", _context5.t0);
           return _context5.abrupt("return", null);
-        case 21:
+        case 24:
         case "end":
           return _context5.stop();
       }
-    }, _callee5, null, [[0, 17]]);
+    }, _callee5, null, [[0, 20]]);
   }));
   return function apiGetHis(_x10) {
     return _ref5.apply(this, arguments);
@@ -287,7 +298,7 @@ var apiChangeInforUser = /*#__PURE__*/function () {
 }();
 var apiGet5His = /*#__PURE__*/function () {
   var _ref7 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee7(idtk) {
-    var _final2, resHis, i, resLess;
+    var _final2, resHis, i, resLess, countQues;
     return _regeneratorRuntime().wrap(function _callee7$(_context7) {
       while (1) switch (_context7.prev = _context7.next) {
         case 0:
@@ -310,7 +321,7 @@ var apiGet5His = /*#__PURE__*/function () {
           i = 0;
         case 6:
           if (!(i < resHis.length)) {
-            _context7.next = 14;
+            _context7.next = 17;
             break;
           }
           _context7.next = 9;
@@ -322,26 +333,37 @@ var apiGet5His = /*#__PURE__*/function () {
           });
         case 9:
           resLess = _context7.sent;
+          _context7.next = 12;
+          return db.Question.findAll({
+            where: {
+              id_lession: resHis[i].idLess
+            },
+            group: ["id_lession"],
+            attributes: [[db.sequelize.fn('count', db.sequelize.col('id')), 'countQues']]
+          });
+        case 12:
+          countQues = _context7.sent;
           _final2 = [].concat(_toConsumableArray(_final2), [{
             HisInfor: resHis[i],
-            LessInfor: resLess
+            LessInfor: resLess,
+            countQues: countQues[0].countQues
           }]);
-        case 11:
+        case 14:
           i++;
           _context7.next = 6;
           break;
-        case 14:
-          return _context7.abrupt("return", _final2);
         case 17:
-          _context7.prev = 17;
+          return _context7.abrupt("return", _final2);
+        case 20:
+          _context7.prev = 20;
           _context7.t0 = _context7["catch"](0);
           console.log("error from get5his: ", _context7.t0);
           return _context7.abrupt("return", null);
-        case 21:
+        case 24:
         case "end":
           return _context7.stop();
       }
-    }, _callee7, null, [[0, 17]]);
+    }, _callee7, null, [[0, 20]]);
   }));
   return function apiGet5His(_x14) {
     return _ref7.apply(this, arguments);
