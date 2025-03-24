@@ -25,6 +25,10 @@ var _GetHisUser = require("../controllers/GetHisUser");
 var _PutChangeInforUser = require("../controllers/PutChangeInforUser");
 var _Get5His = require("../controllers/Get5His");
 var _DelHisUser = require("../controllers/DelHisUser");
+var _GetUserAccount = require("../controllers/superior/GetUserAccount");
+var _DeleteUserAccount = require("../controllers/superior/DeleteUserAccount");
+var _PutUpUserToTeach = require("../controllers/superior/PutUpUserToTeach");
+var _GetAdminAccount = require("../controllers/superior/GetAdminAccount");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 var router = _express["default"].Router();
 var web = function web(app) {
@@ -52,6 +56,12 @@ var web = function web(app) {
   router.get('/api/Get5His', _Get5His.Get5His);
   router.put('/api/PutChangeInforUser', _PutChangeInforUser.PutChangeInforUser);
   router["delete"]('/api/DelHisUser', _DelHisUser.DelHisUser);
+  router.get('/api/get5AccountUser', _GetUserAccount.Get5UserAccount);
+  router.get('/api/getAllAccountUser', _GetUserAccount.GetAllUserAccount);
+  router["delete"]('/api/DeleteUserAccount', _DeleteUserAccount.DeleteUserAccount);
+  router.put('/api/PutUpUserToTeach', _PutUpUserToTeach.PutUpUserToTeach);
+  router.get('/api/Get5AdminAccount', _GetAdminAccount.Get5AdminAccount);
+  router.get('/api/GetAllAdminAccount', _GetAdminAccount.GetAllAdminAccount);
   router.get('/', function (req, res) {
     return res.send('test');
   });

@@ -24,6 +24,10 @@ import { GetHisUser } from '../controllers/GetHisUser';
 import { PutChangeInforUser } from '../controllers/PutChangeInforUser';
 import { Get5His } from '../controllers/Get5His';
 import { DelHisUser } from '../controllers/DelHisUser';
+import { Get5UserAccount, GetAllUserAccount } from '../controllers/superior/GetUserAccount';
+import { DeleteUserAccount } from '../controllers/superior/DeleteUserAccount';
+import { PutUpUserToTeach } from '../controllers/superior/PutUpUserToTeach';
+import { Get5AdminAccount, GetAllAdminAccount } from '../controllers/superior/GetAdminAccount';
 
 
 
@@ -58,7 +62,12 @@ let web = (app) => {
     router.delete('/api/DelHisUser', DelHisUser);
 
 
-
+    router.get('/api/get5AccountUser', Get5UserAccount);
+    router.get('/api/getAllAccountUser', GetAllUserAccount);
+    router.delete('/api/DeleteUserAccount', DeleteUserAccount);
+    router.put('/api/PutUpUserToTeach', PutUpUserToTeach);
+    router.get('/api/Get5AdminAccount', Get5AdminAccount);
+    router.get('/api/GetAllAdminAccount', GetAllAdminAccount);
 
 
     router.get('/', (req, res) => {
