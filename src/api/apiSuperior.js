@@ -114,16 +114,57 @@ const apiGetAllAdmin = async () => {
         })
         return res;
     } catch (e) {
-        console.log("ERROR FROM GET5ADMIN SUPERIOR", e);
+        console.log("ERROR FROM GETAllComment SUPERIOR", e);
     }
 }
 
+//comment
+const apiGet5Comment = async () => {
+    try {
+        let res = await db.Comment.findAll({
+            order: [['createdAt', 'DESC']], //not createAt diffirent name
+            limit: 5
+            // logging: true
+        })
+        return res;
+    } catch (e) {
+        console.log("ERROR FROM GET5COMMENT SUPERIOR", e);
+    }
+}
+
+const apiGetAllComment = async () => {
+    try {
+        let res = await db.Comment.findAll({
+            order: [['createdAt', 'DESC']], //not createAt diffirent name
+            // logging: true
+        })
+        return res;
+    } catch (e) {
+        console.log("ERROR FROM GETAllCommnet SUPERIOR", e);
+    }
+}
+
+const apiDelComment = async (id) => {
+    try {
+        let res = await db.Comment.destroy({
+            where: {
+                id: id
+            }
+        })
+        return res;
+    } catch (e) {
+        console.log("ERROR FORM DEL COMMENT", e);
+    }
+}
 module.exports = {
     apiGet5User,
     apiGetAllUser,
     apiDelUserById,
     apiUpUserToTeach,
     apiGet5Admin,
-    apiGetAllAdmin
+    apiGetAllAdmin,
+    apiGet5Comment,
+    apiGetAllComment,
+    apiDelComment
 }
 

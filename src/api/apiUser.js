@@ -140,6 +140,18 @@ const apiGetUserById = async (id) => {
     }
 }
 
+const apiPostComment = async (id_tk, comment) => {
+    try {
+        let res = await db.Comment.create({
+            id_tk, comment
+        }
+        );
+        return res;
+    } catch (e) {
+        console.log(e)
+    }
+}
+
 module.exports = {
     ApiRegisterUser,
     apiLogInUser,
@@ -147,5 +159,6 @@ module.exports = {
     apiUpdateStatusVerify,
     apiGetUserToVerify,
     apiChangePassword,
-    apiGetUserById
+    apiGetUserById,
+    apiPostComment
 }

@@ -10,6 +10,7 @@ var middlewareAuth = exports.middlewareAuth = function middlewareAuth(req, res, 
   var _req$headers;
   var while_list = ['/', '/api/PostRegisterUser', '/api/PostLoginUser', '/api/PostSendEmail', '/api/PutUpdateVerify'];
   var admin_list = ['/api/postCreateLession', '/api/GetAllLessionTeach', '/api/postUpdateLessById', '/api/postDeleteLessById', '/api/postCreateQues', '/api/getAllQA', '/api/postDeleteQuesById', '/api/PostUpdateQuestion'];
+  var superior_list = ['/api/get5AccountUser', '/api/getAllAccountUser', '/api/DeleteUserAccount', '/api/PutUpUserToTeach', '/api/Get5AdminAccount', '/api/GetAllAdminAccount', '/api/DelComment'];
   if (while_list.find(function (val) {
     return val === req.originalUrl;
   })) {
@@ -28,6 +29,14 @@ var middlewareAuth = exports.middlewareAuth = function middlewareAuth(req, res, 
           return res.status(401).json({
             EC: 1,
             EM: "You are not ADMIN"
+          });
+        }
+        if (infor.role !== 'SUPERIOR' && superior_list.find(function (val) {
+          return val === req.originalUrl;
+        })) {
+          return res.status(401).json({
+            EC: 1,
+            EM: "You are not SUPERIOR"
           });
         }
         if (infor.exp > Date.now()) {

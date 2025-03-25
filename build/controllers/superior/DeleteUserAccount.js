@@ -8,12 +8,11 @@ var _require = require("../../api/apiSuperior"),
   apiDelUserById = _require.apiDelUserById;
 var DeleteUserAccount = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
-    var _req$body;
     var api;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          if ((_req$body = req.body) !== null && _req$body !== void 0 && _req$body.id) {
+          if (req.body.id) {
             _context.next = 2;
             break;
           }

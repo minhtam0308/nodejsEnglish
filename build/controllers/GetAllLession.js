@@ -18,7 +18,7 @@ var GetAllLession = /*#__PURE__*/function () {
           list = _context.sent;
           return _context.abrupt("return", res.status(200).json({
             EC: 0,
-            EM: "Get User Success",
+            EM: "Get Lession Success",
             data: list
           }));
         case 7:

@@ -28,6 +28,9 @@ import { Get5UserAccount, GetAllUserAccount } from '../controllers/superior/GetU
 import { DeleteUserAccount } from '../controllers/superior/DeleteUserAccount';
 import { PutUpUserToTeach } from '../controllers/superior/PutUpUserToTeach';
 import { Get5AdminAccount, GetAllAdminAccount } from '../controllers/superior/GetAdminAccount';
+import { PostComment } from '../controllers/PostComment';
+import { Get5Comment, GetAllComment } from '../controllers/superior/GetComment';
+import DelComment from '../controllers/superior/DelComment';
 
 
 
@@ -60,14 +63,21 @@ let web = (app) => {
     router.get('/api/Get5His', Get5His);
     router.put('/api/PutChangeInforUser', PutChangeInforUser);
     router.delete('/api/DelHisUser', DelHisUser);
+    router.post('/api/PostComment', PostComment);
 
 
+    //supertior
     router.get('/api/get5AccountUser', Get5UserAccount);
     router.get('/api/getAllAccountUser', GetAllUserAccount);
     router.delete('/api/DeleteUserAccount', DeleteUserAccount);
     router.put('/api/PutUpUserToTeach', PutUpUserToTeach);
     router.get('/api/Get5AdminAccount', Get5AdminAccount);
     router.get('/api/GetAllAdminAccount', GetAllAdminAccount);
+    router.get('/api/GetAllComment', GetAllComment);
+    router.get('/api/Get5Comment', Get5Comment);
+    router.delete('/api/DelComment', DelComment);
+
+
 
 
     router.get('/', (req, res) => {

@@ -6,7 +6,7 @@ const GetAllLession = async (req, res) => {
         let list = await apiGetAllLession();
         return res.status(200).json({
             EC: 0,
-            EM: "Get User Success",
+            EM: "Get Lession Success",
             data: list
         });
 

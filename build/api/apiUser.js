@@ -287,6 +287,35 @@ var apiGetUserById = /*#__PURE__*/function () {
     return _ref7.apply(this, arguments);
   };
 }();
+var apiPostComment = /*#__PURE__*/function () {
+  var _ref8 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee8(id_tk, comment) {
+    var res;
+    return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+      while (1) switch (_context8.prev = _context8.next) {
+        case 0:
+          _context8.prev = 0;
+          _context8.next = 3;
+          return db.Comment.create({
+            id_tk: id_tk,
+            comment: comment
+          });
+        case 3:
+          res = _context8.sent;
+          return _context8.abrupt("return", res);
+        case 7:
+          _context8.prev = 7;
+          _context8.t0 = _context8["catch"](0);
+          console.log(_context8.t0);
+        case 10:
+        case "end":
+          return _context8.stop();
+      }
+    }, _callee8, null, [[0, 7]]);
+  }));
+  return function apiPostComment(_x10, _x11) {
+    return _ref8.apply(this, arguments);
+  };
+}();
 module.exports = {
   ApiRegisterUser: ApiRegisterUser,
   apiLogInUser: apiLogInUser,
@@ -294,5 +323,6 @@ module.exports = {
   apiUpdateStatusVerify: apiUpdateStatusVerify,
   apiGetUserToVerify: apiGetUserToVerify,
   apiChangePassword: apiChangePassword,
-  apiGetUserById: apiGetUserById
+  apiGetUserById: apiGetUserById,
+  apiPostComment: apiPostComment
 };

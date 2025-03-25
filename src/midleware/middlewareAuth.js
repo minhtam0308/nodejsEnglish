@@ -15,6 +15,15 @@ export const middlewareAuth = (req, res, next) => {
         '/api/postDeleteQuesById',
         '/api/PostUpdateQuestion'
     ];
+    const superior_list = [
+        '/api/get5AccountUser',
+        '/api/getAllAccountUser',
+        '/api/DeleteUserAccount',
+        '/api/PutUpUserToTeach',
+        '/api/Get5AdminAccount',
+        '/api/GetAllAdminAccount',
+        '/api/DelComment'
+    ]
     if (while_list.find((val) => val === req.originalUrl)) {
         next();
         return;
@@ -32,6 +41,12 @@ export const middlewareAuth = (req, res, next) => {
                     return res.status(401).json({
                         EC: 1,
                         EM: "You are not ADMIN"
+                    })
+                }
+                if (infor.role !== 'SUPERIOR' && (superior_list.find((val) => val === req.originalUrl))) {
+                    return res.status(401).json({
+                        EC: 1,
+                        EM: "You are not SUPERIOR"
                     })
                 }
                 if (infor.exp > Date.now()) {

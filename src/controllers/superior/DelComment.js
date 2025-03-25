@@ -1,34 +1,31 @@
-const { apiDelUserById } = require("../../api/apiSuperior");
+import { apiDelComment } from "../../api/apiSuperior";
 
 
-const DeleteUserAccount = async (req, res) => {
-
+const DelComment = async (req, res) => {
     if (!req.body.id) {
         return res.status(200).json({
             EC: 1,
             EM: "Not Enough Data"
         })
     }
-    let api = await apiDelUserById(req.body.id); // =0 =1
+    let api = await apiDelComment(req.body.id); // =0 =1
     // console.log(api)
     if (api) {
         {
             return res.status(200).json({
                 EC: 0,
-                EM: "Delete User Success"
+                EM: "Delete Comment Success"
             })
         }
     } else if (api === 0) {
         return res.status(200).json({
             EC: 3,
-            EM: "Account is not exist"
+            EM: "That Comment is not exist"
         })
     }
     return res.status(200).json({
         EC: 2,
         EM: "ERROR FROM BACKEND"
     })
-
 }
-
-module.exports = { DeleteUserAccount }
+export default DelComment;

@@ -1,4 +1,5 @@
 
+const { Op } = require('sequelize');
 const db = require('../models')
 
 const apiCreateLession = async (data) => {
@@ -27,7 +28,9 @@ const apiGetAllLession = async () => {
         let res = [];
         let teachers = await db.User.findAll(
             {
-                where: { role: "ADMIN" },
+                where: {
+                    role: { [Op.notIn]: ['USER'] }
+                },
                 attributes: ['userName', 'id', 'image']
 
             }

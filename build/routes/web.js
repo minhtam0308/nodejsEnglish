@@ -29,6 +29,9 @@ var _GetUserAccount = require("../controllers/superior/GetUserAccount");
 var _DeleteUserAccount = require("../controllers/superior/DeleteUserAccount");
 var _PutUpUserToTeach = require("../controllers/superior/PutUpUserToTeach");
 var _GetAdminAccount = require("../controllers/superior/GetAdminAccount");
+var _PostComment = require("../controllers/PostComment");
+var _GetComment = require("../controllers/superior/GetComment");
+var _DelComment = _interopRequireDefault(require("../controllers/superior/DelComment"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 var router = _express["default"].Router();
 var web = function web(app) {
@@ -56,12 +59,18 @@ var web = function web(app) {
   router.get('/api/Get5His', _Get5His.Get5His);
   router.put('/api/PutChangeInforUser', _PutChangeInforUser.PutChangeInforUser);
   router["delete"]('/api/DelHisUser', _DelHisUser.DelHisUser);
+  router.post('/api/PostComment', _PostComment.PostComment);
+
+  //supertior
   router.get('/api/get5AccountUser', _GetUserAccount.Get5UserAccount);
   router.get('/api/getAllAccountUser', _GetUserAccount.GetAllUserAccount);
   router["delete"]('/api/DeleteUserAccount', _DeleteUserAccount.DeleteUserAccount);
   router.put('/api/PutUpUserToTeach', _PutUpUserToTeach.PutUpUserToTeach);
   router.get('/api/Get5AdminAccount', _GetAdminAccount.Get5AdminAccount);
   router.get('/api/GetAllAdminAccount', _GetAdminAccount.GetAllAdminAccount);
+  router.get('/api/GetAllComment', _GetComment.GetAllComment);
+  router.get('/api/Get5Comment', _GetComment.Get5Comment);
+  router["delete"]('/api/DelComment', _DelComment["default"]);
   router.get('/', function (req, res) {
     return res.send('test');
   });
